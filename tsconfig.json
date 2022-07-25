@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "es2021"
+    ],
+    "target": "es2021",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "allowJs": true,
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "typeRoots": []
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "tests"
+  ]
+}
