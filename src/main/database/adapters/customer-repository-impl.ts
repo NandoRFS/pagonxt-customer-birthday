@@ -34,8 +34,12 @@ export class CustomerRepositoryImpl implements CustomerRepository {
             ],
           },
         }
+      },
+      {
+        $unset: ["__v", "_id"]
       }
     ])
+
     return data
   }
 }
