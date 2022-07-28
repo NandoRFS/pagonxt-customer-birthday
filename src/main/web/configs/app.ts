@@ -1,12 +1,13 @@
-import 'dotenv/config'
-
+import './dotenv'
+import '../../shared/container'
+import 'express-async-errors'
+import * as database from './database'
 import express from 'express'
 import router from '../routes/router'
 import errorHandler from '../middlewares/error-handler'
-import './database'
-
 const app = express()
 
+database.connect()
 app.disable('x-powered-by')
 app.disable('etag')
 app.use(express.json())
