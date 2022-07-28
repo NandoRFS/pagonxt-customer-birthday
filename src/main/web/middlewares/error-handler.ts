@@ -1,21 +1,26 @@
-import { NextFunction, Request, Response } from "express"
-import { NotFoundError } from "../../shared/errors/not-found-error"
-import { InvalidArgumentError } from "../../shared/errors/invalid-arguments-error"
-import { MongoServerError } from "mongodb"
+/* eslint-disable indent */
+import { NextFunction, Request, Response } from 'express'
+import { ValidatorError } from '../../shared/errors/validator-error'
+import { MongoServerError } from 'mongodb'
+import ReturnError from '../entities/return-error.interface'
 
-export default function errorHandler(error: Error, req: Request, res: Response, next: NextFunction) {
-  if (error instanceof InvalidArgumentError) {
-    return res.status(400).json(error.message)
-  } else if (error instanceof NotFoundError) {
-    return res.status(404).json(error.message)
-  } else if (error instanceof MongoServerError) {
-    if (error.code === 11000) {
-      // TODO: adicionar Object.entries
-      return res.status(400).json(`duplicated value: ${JSON.stringify(error.keyValue)}`)
-    }
-    return res.status(400).json(error.message)
-  } else {
-    return res.status(500).json(error.message)
-  }
+export default function errorHandler(error: Error, req: Request, res: Response, _next: NextFunction) {
+	const returnError: ReturnError = {
+		statusCode: 500,
+		message: error.message
+	}
+	switch (true) {
+		case error instanceof ValidatorError:
+			returnError.statusCode = 400
+			returnError.message = 'validation error'
+			returnError.errors = (error as ValidatorError).errors
+			return res.status(400).json(returnError)
+		case error instanceof MongoServerError:
+			returnError.statusCode = 400
+			returnError.message = `duplicated value: ${JSON.stringify((error as MongoServerError).keyValue)}`
+			return res.status(400).json(returnError)
+		default:
+			return res.status(500).json(returnError)
+	}
 
 }
