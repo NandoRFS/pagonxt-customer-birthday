@@ -1,22 +1,17 @@
-import { CustomerRepository } from "../../repositories/customer.repository";
-import { inject, injectable } from "tsyringe";
+import { inject, injectable } from 'tsyringe'
+import { CustomerRepository } from '../../repositories/customer.repository'
 
 @injectable()
 export class ListCustomerBirthDays {
-  private repository: CustomerRepository
+	private repository: CustomerRepository
 
-  constructor(
-    @inject('CustomerRepositoryImpl')
-    repository: CustomerRepository
-  ) {
-    this.repository = repository
-  }
+	constructor(@inject('CustomerRepositoryImpl') repository: CustomerRepository) {
+		this.repository = repository
+	}
 
-  async execute() {
+	async execute() {
+		const data = await this.repository.find()
 
-    const data = await this.repository.find()
-
-    return data
-  }
-
+		return data
+	}
 }
