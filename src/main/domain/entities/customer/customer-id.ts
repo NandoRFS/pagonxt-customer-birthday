@@ -28,7 +28,6 @@ export class CustomerId {
     return true
   }
 
-  // parser para nao duplicar
   toJSON() {
     return this.customerId
   }
