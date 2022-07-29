@@ -1,7 +1,9 @@
 import { Customer } from '../../../../main/domain/entities/customer/customer'
 import { CustomerRepository } from '../../../../main/application/repositories/customer.repository'
-import { listCustumerBirthdaysMock } from '../../application/usecases/list-customer-birthdays/list-customer-birthdays.mock'
+import { listCustomerBirthdaysMock } from '../../application/usecases/list-customer-birthdays/list-customer-birthdays.mock'
 import { registerCustomerBirthDate } from '../../../mocks/application/usecases/register-customer-birth-date/register-customer-birth-date.mock'
+import { CustomerUpdate } from '../../../../main/domain/entities/customer/custumer-update'
+import { NotFoundError } from '../../../../main/shared/errors/not-found-error'
 
 export class CustomerRepositoryImplMock implements CustomerRepository {
 
@@ -11,6 +13,20 @@ export class CustomerRepositoryImplMock implements CustomerRepository {
 	}
 
 	async find(): Promise<Customer[]> {
-		return listCustumerBirthdaysMock
+		return listCustomerBirthdaysMock
+	}
+
+	async findOneAndUpdate(customerId: string, customerUpdate: CustomerUpdate): Promise<CustomerUpdate> {
+		const data = listCustomerBirthdaysMock.find(customer => customer.customerId === customerId)
+
+		if (data === null) {
+			throw new NotFoundError(`customerId ${customerId} not found`)
+		}
+		return customerUpdate
+	}
+
+
+	async delete(customerId: string): Promise<string> {
+		return 'deleted'
 	}
 }

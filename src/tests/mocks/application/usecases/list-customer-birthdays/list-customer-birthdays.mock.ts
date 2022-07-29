@@ -1,4 +1,4 @@
-export const listCustumerBirthdaysMock = [
+export const listCustomerBirthdaysMock = [
 	{
 		birthDate: new Date('1997-07-28T00:00:00.000Z'),
 		timeZone: 'Asia/Tokyo',
