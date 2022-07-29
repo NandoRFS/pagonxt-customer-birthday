@@ -6,7 +6,9 @@ const router = express.Router()
 
 const customerController = new CustomerController()
 
-router.post('/birthday', CustomerValidator.validate, customerController.insert)
+router.post('/birthday', CustomerValidator.createValidation, customerController.insert)
 router.get('/birthday', customerController.find)
+router.put('/birthday/:customerId', CustomerValidator.updateValidation, customerController.update)
+router.delete('/birthday/:customerId', customerController.delete)
 
 export default router
