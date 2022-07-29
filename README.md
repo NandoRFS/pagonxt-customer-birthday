@@ -4,7 +4,7 @@
 
 The MS was developed in *Node.js*, *Typescript* and *express*, using concepts from *Clean Architecture*, unit and integration tests with *Jest* and a non relational database *MongoDB*.
 
-> The projet is available in [Heroku](https://pagonxt-customer-birthday.herokuapp.com/pagonxt-customer-birthday/docs)
+> The projet is available on [Heroku](https://pagonxt-customer-birthday.herokuapp.com/pagonxt-customer-birthday/docs)
 
 ## Install and Run the Project
 
