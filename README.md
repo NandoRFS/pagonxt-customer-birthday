@@ -24,9 +24,9 @@ Go to the */pagonxt-customer-birthday/docs* endpoint to see the documentation ab
 
 Before running any tests, set your test environment preferences, in the *jest-setup.js* file
 
-Run `npm test:unit` to run unit tests             
+Run `npm run test:unit` to run unit tests             
 
-Run `npm test:integration` to run integration tests, generating a *coverage* file
+Run `npm run test:integration` to run integration tests, generating a *coverage* file
 
 
 MIT Copyright (c) 2022 Fernando Rodrigues da Silva
