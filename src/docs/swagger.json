@@ -1,0 +1,190 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Documentation on how PagoNxt Customer Birthday works.",
+    "version": "1.0.0",
+    "title": "Swagger PagoNxt Customer Birthday"
+  },
+  "paths": {
+    "/healthcheck": {
+      "get": {
+        "tags": [
+          "Healthcheck - /healthcheck"
+        ],
+        "summary": "Application listening",
+        "description": "Return a text if application is up and listening",
+        "responses": {
+          "200": {
+            "description": "List customer birthdays of the day",
+            "content": {
+              "text": {
+                "example": "listening"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/birthday": {
+      "get": {
+        "tags": [
+          "Customer - /customer/birthday"
+        ],
+        "summary": "Birthdays of the day",
+        "description": "Search for birthdays of the day and list them",
+        "responses": {
+          "200": {
+            "description": "List customer birthdays of the day",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "birthDate": "1990-07-28T00:00:00.000Z",
+                    "timeZone": "America/Sao_Paulo",
+                    "customerId": "p1p2"
+                  },
+                  {
+                    "birthDate": "1990-07-29T00:00:00.000Z",
+                    "timeZone": "Asia/Tokyo",
+                    "customerId": "p1"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Customer - /customer/birthday"
+        ],
+        "summary": "Save the customer's birth date and timezone",
+        "description": "Search if user already in use and save birth date and timezone",
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "birthDate": {
+                    "type": "string",
+                    "example": "yyyy-mm-dd"
+                  },
+                  "timeZone": {
+                    "type": "string"
+                  },
+                  "customerId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Return the saved customer",
+            "content": {
+              "application/json": {
+                "example": {
+                  "birthDate": "1990-07-30",
+                  "timeZone": "Asia/Tokyo",
+                  "customerId": "p2"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Return Bad Request error with reason like example",
+            "content": {
+              "application/json": {
+                "example": {
+                  "statusCode": 400,
+                  "message": "duplicated value: {\"customerId\":\"p2\"}"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/birthday/{customerId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "customerId",
+          "schema": {
+            "type": "string"
+          },
+          "required": true,
+          "description": "ID of the customer to edit"
+        }
+      ],
+      "put": {
+        "tags": [
+          "Customer - /customer/birthday"
+        ],
+        "summary": "Birthdays of the day",
+        "description": "Update the customer's birth date or timezone",
+        "requestBody": {
+          "description": "Must contain at least one of [birthDate, timeZone]",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "birthDate": {
+                    "type": "string",
+                    "example": "yyyy-mm-dd"
+                  },
+                  "timeZone": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success, no content"
+          },
+          "400": {
+            "description": "Return Bad Request error with reason like example",
+            "content": {
+              "application/json": {
+                "example": {
+                  "statusCode": 400,
+                  "message": "validation error",
+                  "errors": [
+                    "\"birthDate\" must be less than \"2022-07-29T03:09:17.419Z\""
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Customer - /customer/birthday"
+        ],
+        "summary": "Delete a complete customer data save",
+        "description": "search for customer and delete",
+        "responses": {
+          "200": {
+            "description": "List customer birthdays of the day",
+            "content": {
+              "text": {
+                "example": "deleted"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
