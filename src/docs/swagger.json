@@ -1,10 +1,16 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "description": "Documentation on how PagoNxt Customer Birthday works.",
+    "description": "Microservice responsible for maintaining information about PagoNxt customers' birthdays.",
     "version": "1.0.0",
     "title": "Swagger PagoNxt Customer Birthday"
   },
+  "servers": [
+    {
+      "url": "https://pagonxt-customer-birthday.herokuapp.com/pagonxt-customer-birthday",
+      "description": "Heroku server"
+    }
+  ],
   "paths": {
     "/healthcheck": {
       "get": {
@@ -126,7 +132,7 @@
         "tags": [
           "Customer - /customer/birthday"
         ],
-        "summary": "Birthdays of the day",
+        "summary": "Update the customer's birth date and timezone",
         "description": "Update the customer's birth date or timezone",
         "requestBody": {
           "description": "Must contain at least one of [birthDate, timeZone]",
@@ -165,6 +171,17 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Return Not Found error with customerId",
+            "content": {
+              "application/json": {
+                "example": {
+                  "statusCode": 404,
+                  "message": "customerId 92 not found"
+                }
+              }
+            }
           }
         }
       },
@@ -176,7 +193,15 @@
         "description": "search for customer and delete",
         "responses": {
           "200": {
-            "description": "List customer birthdays of the day",
+            "description": "A message that data has been deleted",
+            "content": {
+              "text": {
+                "example": "deleted"
+              }
+            }
+          },
+          "404": {
+            "description": "A message that the data could not be found",
             "content": {
               "text": {
                 "example": "deleted"
