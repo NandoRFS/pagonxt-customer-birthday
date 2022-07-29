@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { listCustumerBirthdaysMock } from '../../../mocks/application/usecases/list-customer-birthdays/list-customer-birthdays.mock'
+import { listCustomerBirthdaysMock } from '../../../mocks/application/usecases/list-customer-birthdays/list-customer-birthdays.mock'
 import { ListCustomerBirthDays } from '../../../../main/application/usecases/list-customer-birthdays.ts/list-customer-birthdays'
 import { container } from 'tsyringe'
 import { CustomerRepository } from '../../../../main/application/repositories/customer.repository'
@@ -16,7 +16,7 @@ describe('List customer birthdays use case', () => {
 
 		const customerBirthdays = await listCustomerBirthDays.execute()
 
-		expect(customerBirthdays).toBe(listCustumerBirthdaysMock)
+		expect(customerBirthdays).toBe(listCustomerBirthdaysMock)
 
 	})
 
