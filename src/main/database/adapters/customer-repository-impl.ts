@@ -46,7 +46,10 @@ export class CustomerRepositoryImpl implements CustomerRepository {
 	}
 
 	async delete(customerId: string): Promise<string> {
-		await CustomerModel.findOneAndDelete({ customerId })
+		const data = await CustomerModel.findOneAndDelete({ customerId })
+		if (data === null) {
+			throw new NotFoundError(`customerId ${customerId} not found`)
+		}
 		return 'deleted'
 	}
 
