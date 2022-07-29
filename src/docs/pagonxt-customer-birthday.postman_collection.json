@@ -1,0 +1,524 @@
+{
+	"info": {
+		"_postman_id": "d8331cd4-550f-4d97-a728-b92c7fb1afee",
+		"name": "PagoNxt Customer Birthday",
+		"description": "Microservice responsible for maintaining information about PagoNxt customers' birthdays.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17280858"
+	},
+	"item": [
+		{
+			"name": "customer/birthday",
+			"item": [
+				{
+					"name": "Birthdays of the day",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/customer/birthday",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customer",
+								"birthday"
+							]
+						},
+						"description": "Search for birthdays of the day and list them"
+					},
+					"response": [
+						{
+							"name": "List customer birthdays of the day",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/customer/birthday",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customer",
+										"birthday"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"birthDate\": \"1990-07-28T00:00:00.000Z\",\n    \"timeZone\": \"America/Sao_Paulo\",\n    \"customerId\": \"p1p2\"\n  },\n  {\n    \"birthDate\": \"1990-07-29T00:00:00.000Z\",\n    \"timeZone\": \"Asia/Tokyo\",\n    \"customerId\": \"p1\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Save the customer's birth date and timezone",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"birthDate\": \"1999-04-29\",\n  \"timeZone\": \"America/Sao_Paulo\",\n  \"customerId\": \"12fgkr245\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customer/birthday",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customer",
+								"birthday"
+							]
+						},
+						"description": "Search if user already in use and save birth date and timezone"
+					},
+					"response": [
+						{
+							"name": "Return the saved customer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"birthDate\": \"yyyy-mm-dd\",\n  \"timeZone\": \"adipisicing labore Ut ut\",\n  \"customerId\": \"occaecat velit\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customer/birthday",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customer",
+										"birthday"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"birthDate\": \"1990-07-30\",\n  \"timeZone\": \"Asia/Tokyo\",\n  \"customerId\": \"p2\"\n}"
+						},
+						{
+							"name": "Return Bad Request error with reason like example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"birthDate\": \"yyyy-mm-dd\",\n  \"timeZone\": \"adipisicing labore Ut ut\",\n  \"customerId\": \"occaecat velit\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customer/birthday",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customer",
+										"birthday"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"statusCode\": 400,\n  \"message\": \"duplicated value: {\\\"customerId\\\":\\\"p2\\\"}\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update the customer's birth date and timezone",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"birthDate\": \"1999-04-29\",\n  \"timeZone\": \"America/Sao_Paulo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customer/birthday/:customerId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customer",
+								"birthday",
+								":customerId"
+							],
+							"variable": [
+								{
+									"key": "customerId",
+									"value": null
+								}
+							]
+						},
+						"description": "Update the customer's birth date or timezone"
+					},
+					"response": [
+						{
+							"name": "Success, no content",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"birthDate\": \"yyyy-mm-dd\",\n  \"timeZone\": \"mollit tempor voluptate\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customer/birthday/:customerId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customer",
+										"birthday",
+										":customerId"
+									],
+									"variable": [
+										{
+											"key": "customerId",
+											"value": "officia Lorem incididunt",
+											"description": "(Required) ID of the customer to edit"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Return Bad Request error with reason like example",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"birthDate\": \"yyyy-mm-dd\",\n  \"timeZone\": \"mollit tempor voluptate\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customer/birthday/:customerId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customer",
+										"birthday",
+										":customerId"
+									],
+									"variable": [
+										{
+											"key": "customerId",
+											"value": "officia Lorem incididunt",
+											"description": "(Required) ID of the customer to edit"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"statusCode\": 400,\n  \"message\": \"validation error\",\n  \"errors\": [\n    \"\\\"birthDate\\\" must be less than \\\"2022-07-29T03:09:17.419Z\\\"\"\n  ]\n}"
+						},
+						{
+							"name": "Return Not Found error with customerId",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"birthDate\": \"yyyy-mm-dd\",\n  \"timeZone\": \"mollit tempor voluptate\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customer/birthday/:customerId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customer",
+										"birthday",
+										":customerId"
+									],
+									"variable": [
+										{
+											"key": "customerId",
+											"value": "officia Lorem incididunt",
+											"description": "(Required) ID of the customer to edit"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"statusCode\": 404,\n  \"message\": \"customerId 92 not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a complete customer data save",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/customer/birthday/:customerId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customer",
+								"birthday",
+								":customerId"
+							],
+							"variable": [
+								{
+									"key": "customerId",
+									"value": "officia Lorem incididunt",
+									"description": "(Required) ID of the customer to edit"
+								}
+							]
+						},
+						"description": "search for customer and delete"
+					},
+					"response": [
+						{
+							"name": "A message that data has been deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/customer/birthday/:customerId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customer",
+										"birthday",
+										":customerId"
+									],
+									"variable": [
+										{
+											"key": "customerId",
+											"value": "officia Lorem incididunt",
+											"description": "(Required) ID of the customer to edit"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text"
+								}
+							],
+							"cookie": [],
+							"body": "deleted"
+						},
+						{
+							"name": "A message that the data could not be found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/customer/birthday/:customerId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customer",
+										"birthday",
+										":customerId"
+									],
+									"variable": [
+										{
+											"key": "customerId",
+											"value": "officia Lorem incididunt",
+											"description": "(Required) ID of the customer to edit"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text"
+								}
+							],
+							"cookie": [],
+							"body": "deleted"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Application listening",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/healthcheck",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"healthcheck"
+					]
+				},
+				"description": "Return a text if application is up and listening"
+			},
+			"response": [
+				{
+					"name": "List customer birthdays of the day",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/healthcheck",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"healthcheck"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text"
+						}
+					],
+					"cookie": [],
+					"body": "listening"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://pagonxt-customer-birthday.herokuapp.com/pagonxt-customer-birthday",
+			"type": "string"
+		}
+	]
+}
