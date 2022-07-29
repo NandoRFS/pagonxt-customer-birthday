@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express'
 import { ValidatorError } from '../../shared/errors/validator-error'
 import { MongoServerError } from 'mongodb'
 import ReturnError from '../entities/return-error.interface'
+import { NotFoundError } from '../../shared/errors/not-found-error'
 
 export default function errorHandler(error: Error, req: Request, res: Response, _next: NextFunction) {
 	const returnError: ReturnError = {
@@ -15,6 +16,9 @@ export default function errorHandler(error: Error, req: Request, res: Response, 
 			returnError.message = 'validation error'
 			returnError.errors = (error as ValidatorError).errors
 			return res.status(400).json(returnError)
+		case error instanceof NotFoundError:
+			returnError.statusCode = 404
+			return res.status(404).json(returnError)
 		case error instanceof MongoServerError:
 			returnError.statusCode = 400
 			returnError.message = `duplicated value: ${JSON.stringify((error as MongoServerError).keyValue)}`
