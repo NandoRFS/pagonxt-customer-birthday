@@ -1,6 +1,8 @@
 import { Customer } from '../../domain/entities/customer/customer'
 import { CustomerRepository } from '../../application/repositories/customer.repository'
 import CustomerModel from '../models/customer.model'
+import { CustomerUpdate } from '../../../main/domain/entities/customer/custumer-update'
+import { NotFoundError } from '../../../main/shared/errors/not-found-error'
 
 export class CustomerRepositoryImpl implements CustomerRepository {
 
@@ -41,5 +43,18 @@ export class CustomerRepositoryImpl implements CustomerRepository {
 		])
 
 		return data
+	}
+
+	async delete(customerId: string): Promise<string> {
+		await CustomerModel.findOneAndDelete({ customerId })
+		return 'deleted'
+	}
+
+	async findOneAndUpdate(customerId: string, customerUpdate: CustomerUpdate): Promise<CustomerUpdate> {
+		const data = await CustomerModel.findOneAndUpdate({ customerId }, customerUpdate, { rawResult: true })
+		if (data.value === null) {
+			throw new NotFoundError(`customerId ${customerId} not found`)
+		}
+		return customerUpdate
 	}
 }
