@@ -59,6 +59,15 @@ describe('Customer route /customer', () => {
 	})
 
 	test('[DELETE - /customer/birthday] Should return', async () => {
+		const customerId = 'invalid123'
+		const response = await request(app)
+			.delete(`${contextApiPath}/customer/birthday/${customerId}`)
+
+		expect(response.statusCode).toBe(404)
+
+	})
+
+	test('[DELETE - /customer/birthday] Should return', async () => {
 		const customerId = '123'
 		const response = await request(app)
 			.delete(`${contextApiPath}/customer/birthday/${customerId}`)
